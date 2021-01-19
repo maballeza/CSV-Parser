@@ -147,6 +147,10 @@
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="University.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\cwurData.csv" />
+    <None Include="README.md" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
