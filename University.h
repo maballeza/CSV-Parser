@@ -13,19 +13,19 @@ namespace Analysis
 		University(const University&);
 		University(University&&) noexcept;
 		~University() {};
+		University& operator=(const University&);
+		University& operator=(University&&) noexcept;
+
+		University& operator+=(const University& rUni);
+		University& operator/=(int val);
 
 		// Initial on-boarding of values.
 		void AssignMember(std::wstring, int);									
 		// Selective data retrieval (used in support of analytical methods).
+		float RetrieveMember(int) const;
 		int RetrieveIndex() const;
-		float RetrieveMember(int) const;									
 
-		University& operator=(const University&);
-		University& operator=(University&&) noexcept;
-		University& operator+=(const University& rUni); 
-		University& operator/=(int val);
-
-		static const std::map<int, std::wstring> map;
+		static std::map<int, std::wstring> map;
 
 	private:
 		struct Rank

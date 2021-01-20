@@ -23,7 +23,7 @@ void Parser::ParseData(std::vector<Analysis::University>& list)
 					p = std::adjacent_find(p, --value.end(), [](wchar_t x, wchar_t y) { return (x == L' ') && (y != L'o'); });
 				} while (++p != value.end());
 
-				header.emplace(col++, value);
+				Analysis::University::map.emplace(col++, value);
 			}
 			else			// Values: Ignore commas within strings.
 			{

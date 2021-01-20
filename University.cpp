@@ -4,42 +4,6 @@
 
 namespace Analysis
 {
-	const std::map<int, std::wstring> University::map{
-		{0, L"World Rank"},
-		{1, L"Institution"},
-		{2, L"Country"},
-		{3, L"National Rank"},
-		{4, L"Quality of Education"},
-		{5, L"Alumni Employment"},
-		{6, L"Quality of Faculty"},
-		{7, L"Publications"},
-		{8, L"Influence"},
-		{9, L"Citations"},
-		{10, L"Broad Impact"},
-		{11, L"Patents"},
-		{12, L"Score"},
-		{13, L"Year"}
-	};
-
-	float University::RetrieveMember(int item) const
-	{
-		if (item == 1 || item == 2) {	// wstring values.
-			return -1;
-		}
-		if (item == 0) return Rank.World;
-		if (item == 3) return Rank.National;
-		if (item == 4) return Quality.Education;
-		if (item == 5) return AlumniEmployment;
-		if (item == 6) return Quality.Faculty;
-		if (item == 7) return Publications;
-		if (item == 8) return Influence;
-		if (item == 9) return Citations;
-		if (item == 10) return BroadImpact;
-		if (item == 11) return Patents;
-		if (item == 12) return Score;
-		if (item == 13) return Year;
-		else { return -1; }
-	}
 
 	University::University() : 
 		Rank{ 0, 0 }, Quality{ 0, 0 }, Institution{}, Country{}, 
@@ -69,40 +33,6 @@ namespace Analysis
 		uni.BroadImpact = 0;
 		uni.Score = 0;
 		uni.Year = 0;
-	}
-
-	void University::AssignMember(std::wstring data, int item)
-	{
-		{
-			if (data.empty()) data = L"-1";
-			if (std::none_of(data.begin(), data.end(), [](wchar_t x) { return isalpha(x); }))
-			{
-				if (item == 12)
-				{
-					Score = stof(data);
-				}
-				else
-				{
-					int i = stoi(data);
-					if (item == 0) Rank.World = i;
-					if (item == 3) Rank.National = i;
-					if (item == 4) Quality.Education = i;
-					if (item == 5) AlumniEmployment = i;
-					if (item == 6) Quality.Faculty = i;
-					if (item == 7) Publications = i;
-					if (item == 8) Influence = i;
-					if (item == 9) Citations = i;
-					if (item == 10) BroadImpact = i;
-					if (item == 11) Patents = i;
-					if (item == 13) Year = i;
-				}
-			}
-			else
-			{
-				if (item == 1) Institution = data;
-				if (item == 2) Country = data;
-			}
-		}
 	}
 
 	University& University::operator=(const University& rUni)
@@ -181,10 +111,66 @@ namespace Analysis
 		return *this;
 	}
 
+	void University::AssignMember(std::wstring data, int item)
+	{
+		{
+			if (data.empty()) data = L"-1";
+			if (std::none_of(data.begin(), data.end(), [](wchar_t x) { return isalpha(x); }))
+			{
+				if (item == 12)
+				{
+					Score = stof(data);
+				}
+				else
+				{
+					int i = stoi(data);
+					if (item == 0) Rank.World = i;
+					if (item == 3) Rank.National = i;
+					if (item == 4) Quality.Education = i;
+					if (item == 5) AlumniEmployment = i;
+					if (item == 6) Quality.Faculty = i;
+					if (item == 7) Publications = i;
+					if (item == 8) Influence = i;
+					if (item == 9) Citations = i;
+					if (item == 10) BroadImpact = i;
+					if (item == 11) Patents = i;
+					if (item == 13) Year = i;
+				}
+			}
+			else
+			{
+				if (item == 1) Institution = data;
+				if (item == 2) Country = data;
+			}
+		}
+	}
+
+	float University::RetrieveMember(int item) const
+	{
+		if (item == 1 || item == 2) {	// wstring values.
+			return -1;
+		}
+		if (item == 0) return Rank.World;
+		if (item == 3) return Rank.National;
+		if (item == 4) return Quality.Education;
+		if (item == 5) return AlumniEmployment;
+		if (item == 6) return Quality.Faculty;
+		if (item == 7) return Publications;
+		if (item == 8) return Influence;
+		if (item == 9) return Citations;
+		if (item == 10) return BroadImpact;
+		if (item == 11) return Patents;
+		if (item == 12) return Score;
+		if (item == 13) return Year;
+		else { return -1; }
+	}
+
 	int University::RetrieveIndex() const
 	{
 		return static_cast<int>(Rank.World);
 	}
+
+	std::map<int, std::wstring> University::map{};
 
 	University CalculateAverage(const std::vector<University>& cont, int start, int total)
 	{

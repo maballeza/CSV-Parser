@@ -23,6 +23,4 @@ public:
 private:
 	std::wfstream stream;
 	std::wstring buffer;
-	std::map<int, std::wstring> header;
-
 };
