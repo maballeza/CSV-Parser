@@ -17,8 +17,8 @@ namespace Analysis
 		// Initial on-boarding of values.
 		void AssignMember(std::wstring, int);									
 		// Selective data retrieval (used in support of analytical methods).
-		float RetrieveMember(int) const;									
 		int RetrieveIndex() const;
+		float RetrieveMember(int) const;									
 
 		University& operator=(const University&);
 		University& operator=(University&&) noexcept;

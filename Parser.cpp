@@ -10,9 +10,10 @@ void Parser::ParseData(std::vector<Analysis::University>& list)
 		size_t begin = 0, end = 0, col = 0;
 		while (end < buffer.size())
 		{
+			// Find next value, accounting for last value (without a trailing comma).
 			end = buffer.find(L',', begin);
-			std::wstring value{ buffer, begin, (end > buffer.size()) ? buffer.size() - begin : end - begin };
-			if (isHeader)
+			std::wstring value{ buffer, begin, (end > buffer.size() ? buffer.size() - begin : end - begin) };
+			if (isHeader)	// Header: Remove "_" characters and capitalize titles, "of" being an exception.
 			{
 				auto p = value.begin();
 				std::replace(p, value.end(), L'_', L' ');
@@ -24,7 +25,7 @@ void Parser::ParseData(std::vector<Analysis::University>& list)
 
 				header.emplace(col++, value);
 			}
-			else
+			else			// Values: Ignore commas within strings.
 			{
 				if (!value.empty() && value.front() == L'"' && value.back() != L'"')
 				{

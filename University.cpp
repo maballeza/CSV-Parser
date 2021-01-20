@@ -105,13 +105,6 @@ namespace Analysis
 		}
 	}
 
-	int University::RetrieveIndex() const
-	{
-		return static_cast<int>(Rank.World);
-	}
-
-	static std::map<int, float> Average;	// TODO
-
 	University& University::operator=(const University& rUni)
 	{
 		Rank.World = rUni.Rank.World;
@@ -168,7 +161,7 @@ namespace Analysis
 		Year += rUni.Year;
 		return *this;
 	}
-	
+
 	University& University::operator/=(int val)
 	{
 		Rank.World /= val;
@@ -188,18 +181,22 @@ namespace Analysis
 		return *this;
 	}
 
+	int University::RetrieveIndex() const
+	{
+		return static_cast<int>(Rank.World);
+	}
+
 	University CalculateAverage(const std::vector<University>& cont, int start, int total)
 	{
 		University ret{};
-		int begin = start;
-		int end = begin + total - 1;
-		if ((0 <= begin && end < cont.size()) && !cont.empty())
+		int end = start + total - 1;
+		if ((0 <= start && end < cont.size()) && !cont.empty())
 		{
 			int count = 0;
 			for (const auto& item : cont)
 			{
 				int r = item.RetrieveIndex();
-				if (begin <= r && r <= end)
+				if (start <= r && r <= end)
 				{
 					ret += item;
 					count++;
