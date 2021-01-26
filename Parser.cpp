@@ -1,7 +1,10 @@
 #include "Parser.h"
 
-void Parser::ParseData(std::vector<Analysis::University>& list)
+std::vector<Analysis::University> Parser::ParseData(const std::wstring path)
 {
+	stream.open(path, std::ios_base::in);
+
+	std::vector<Analysis::University> list;
 	while (getline(stream, buffer, L'\n'))
 	{
 		Analysis::University uni;
@@ -39,4 +42,22 @@ void Parser::ParseData(std::vector<Analysis::University>& list)
 		}
 		if (!isHeader) list.emplace_back(uni);
 	}
+
+	stream.close();
+	return list;
+}
+
+void Parser::PrintData(const std::wstring path, const Analysis::University res)
+{
+	stream.open(path, std::ios_base::out);
+
+	if (stream.is_open())
+	{
+		for (const auto val : Analysis::University::map)
+		{
+			stream << val.second << "\t" << res.RetrieveMember(val.first) << std::endl;
+		}
+	}
+
+	stream.close();
 }

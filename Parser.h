@@ -15,12 +15,13 @@
 class Parser
 {
 public:
-	Parser(std::wstring string) : stream{ string, std::ios_base::in } {}
-	~Parser() {}
+	Parser() = default;
+	~Parser() = default;
 
-	void ParseData(std::vector<Analysis::University>& item);
+	std::vector<Analysis::University> ParseData(const std::wstring path);
+	void PrintData(const std::wstring path, const Analysis::University res);
 
 private:
-	std::wfstream stream;
-	std::wstring buffer;
+	std::wfstream stream{};
+	std::wstring buffer{};
 };
