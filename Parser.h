@@ -1,5 +1,6 @@
 #pragma once
-#include "University.h"
+
+#include "Table.h"
 #include <vector>
 #include <algorithm>
 #include <fstream>
@@ -18,8 +19,7 @@ public:
 	Parser() = default;
 	~Parser() = default;
 
-	std::vector<Analysis::University> ParseData(const std::wstring path);
-	void PrintData(const std::wstring path, const Analysis::University res);
+	void ParseData(const std::wstring path);
 
 private:
 	std::wfstream stream{};

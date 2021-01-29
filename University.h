@@ -2,10 +2,11 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <algorithm>
+#include <utility>
 
 namespace Analysis
 {
-
 	class University
 	{
 	public:
@@ -19,42 +20,10 @@ namespace Analysis
 		University& operator+=(const University& rUni);
 		University& operator/=(int val);
 
-		// Initial on-boarding of values.
-		void AssignMember(std::wstring, int);									
-		// Selective data retrieval (used in support of analytical methods).
-		float RetrieveMember(int) const;
-		int RetrieveIndex() const;
-
-		static std::map<int, std::wstring> map;
+		void BuildMembers(int, std::wstring, std::wstring);
 
 	private:
-		struct Rank
-		{
-			float World;
-			float National;
-		};
-
-		struct Quality
-		{
-			float Education;
-			float Faculty;
-		};
-
-		Rank Rank;
-		std::wstring Institution;
-		std::wstring Country;
-		Quality Quality;
-		float AlumniEmployment;
-		float Publications;
-		float Citations;
-		float Patents;
-		float Influence;
-		float BroadImpact;
-		float Score;
-		float Year;
+		std::vector<std::pair<std::wstring, float>> fmembers;
+		std::vector<std::pair<std::wstring, std::wstring>> wsmembers;
 	};
-
-	// Zero-based index.
-	University CalculateAverage(const std::vector<University>&, int start, int total);
-
 } // namespace Analysis

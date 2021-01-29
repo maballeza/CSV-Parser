@@ -1,15 +1,15 @@
 #include "Parser.h"
 
-std::vector<Analysis::University> Parser::ParseData(const std::wstring path)
+void Parser::ParseData(const std::wstring path)
 {
 	stream.open(path, std::ios_base::in);
 
-	std::vector<Analysis::University> list;
+	Table table;
+
 	while (getline(stream, buffer, L'\n'))
 	{
-		Analysis::University uni;
 		bool isHeader = (buffer.size() > buffer.find(L'_')) ? true : false;
-		
+
 		size_t begin = 0, end = 0, col = 0;
 		while (end < buffer.size())
 		{
@@ -26,7 +26,7 @@ std::vector<Analysis::University> Parser::ParseData(const std::wstring path)
 					p = std::adjacent_find(p, --value.end(), [](wchar_t x, wchar_t y) { return (x == L' ') && (y != L'o'); });
 				} while (++p != value.end());
 
-				Analysis::University::map.emplace(col++, value);
+				table.BuildTable(value);
 			}
 			else			// Values: Ignore commas within strings.
 			{
@@ -36,28 +36,26 @@ std::vector<Analysis::University> Parser::ParseData(const std::wstring path)
 					end = buffer.find(L',', ++end);
 					value.append(buffer, begin, end - begin);
 				}
-				uni.AssignMember(value, col++);
+
+				table.BuildItem(col++, value);
 			}
 			begin = end + 1;
 		}
-		if (!isHeader) list.emplace_back(uni);
-	}
-
-	stream.close();
-	return list;
-}
-
-void Parser::PrintData(const std::wstring path, const Analysis::University res)
-{
-	stream.open(path, std::ios_base::out);
-
-	if (stream.is_open())
-	{
-		for (const auto val : Analysis::University::map)
+		if (!isHeader) 
 		{
-			stream << val.second << "\t" << res.RetrieveMember(val.first) << std::endl;
+			table.UpdateList();
 		}
 	}
 
 	stream.close();
 }
+
+//void Parser::PrintData(const std::wstring path)
+//{
+//	stream.open(path, std::ios_base::out);
+//	Table table
+//
+//	table.Print(stream);
+//
+//	stream.close();
+//}
