@@ -36,11 +36,11 @@ namespace Analysis
 	University& University::operator+=(const University& rUni)
 	{
 		auto it = rUni.fmembers.begin();
-		for (auto& [ name, value ] : fmembers)
+		for (auto& [name, val] : fmembers)
 		{
 			if (name == (*it).first)
 			{
-				value += (*it).second;
+				val += (*it).second;
 				it++;
 			}
 		}
@@ -71,5 +71,23 @@ namespace Analysis
 		{
 			wsmembers.emplace_back(std::make_pair(name, data));
 		}
+	}
+
+	bool University::Empty() const
+	{
+		return fmembers.empty() && wsmembers.empty();
+	}
+
+	std::wostream& operator<<(std::wostream& stream, const University uni)
+	{
+		for (auto& [name, val] : uni.wsmembers)
+		{
+			stream << name << L'\t' << val << L'\n';
+		}
+		for (auto& [name, val] : uni.fmembers)
+		{
+			stream << name << L'\t' << val << L'\n';
+		}
+		return stream;
 	}
 } // namespace Analysis

@@ -1,9 +1,8 @@
 #pragma once
-#include <string>
-#include <map>
-#include <vector>
 #include <algorithm>
-#include <utility>
+#include <string>
+#include <vector>
+#include <fstream>
 
 namespace Analysis
 {
@@ -21,9 +20,12 @@ namespace Analysis
 		University& operator/=(int val);
 
 		void BuildMembers(int, std::wstring, std::wstring);
+		bool Empty() const;
+
+		friend std::wostream& operator<<(std::wostream& stream, const University uni);
 
 	private:
-		std::vector<std::pair<std::wstring, float>> fmembers;
-		std::vector<std::pair<std::wstring, std::wstring>> wsmembers;
+		std::vector<std::pair<std::wstring, std::wstring>> wsmembers;  // String members.
+		std::vector<std::pair<std::wstring, float>> fmembers;  // Floating-point members.
 	};
 } // namespace Analysis

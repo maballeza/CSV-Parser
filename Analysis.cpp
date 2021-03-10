@@ -4,6 +4,7 @@ namespace Analysis
 {
 	University CalculateAverage(int start, int end)
 	{
+		// Initialization.
 		Table table;
 		University ret;
 		for (auto& names : table.Columns())

@@ -5,13 +5,10 @@
 int main()
 {
 	Parser par;
-	par.ParseData(L".\\Data\\cwurData.csv");
+	par.Parse(L".\\Data\\cwurData.csv");
 
-	Analysis::University Average1 = Analysis::CalculateAverage(0, 9);
-	//par.PrintData(L".\\Data\\Res.txt", Average1);
-
+	Analysis::University Average = Analysis::CalculateAverage(0, 9); // Averages first 9 list items.
+	par.Print(L".\\Data\\Res.txt"/*, Average*/);  // Prints complete list or average.
+	
 	return 0;
 }
-
-
-//	ACT, R

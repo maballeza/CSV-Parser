@@ -3,6 +3,6 @@
 
 namespace Analysis
 {
-	// Zero-based index.
+	// Non-inclusive average using zero-based index.
 	University CalculateAverage(int start, int total);
 }
