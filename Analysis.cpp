@@ -2,11 +2,13 @@
 
 namespace Analysis
 {
-	University CalculateAverage(int start, int end)
+	University Average(std::pair<int, int> range)
 	{
-		// Initialization.
 		Table table;
 		University ret;
+		int start = range.first;
+		int end = range.second;
+
 		for (auto& names : table.Columns())
 		{ 
 			ret.BuildMembers(0, names, L"0");

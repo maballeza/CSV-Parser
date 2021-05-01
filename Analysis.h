@@ -3,6 +3,6 @@
 
 namespace Analysis
 {
-	// Non-inclusive average using zero-based index.
-	University CalculateAverage(int start, int total);
+	// Standard average using zero-based index across inclusive range.
+	University Average(std::pair<int, int> range);
 }

@@ -3,7 +3,7 @@
 void Parser::Parse(const std::wstring path)
 {
 	Table table;
-	stream.open(path, std::ios_base::in);
+	stream.open(path);
 	if (stream.is_open())
 	{
 		while (getline(stream, buffer, L'\n'))
@@ -46,17 +46,6 @@ void Parser::Parse(const std::wstring path)
 				table.UpdateList();
 			}
 		}
-		stream.close();
-	}
-}
-
-void Parser::Print(const std::wstring path, const Analysis::University uni)
-{
-	Table table;
-	stream.open(path, std::ios_base::out);
-	if (stream.is_open())
-	{
-		table.Print(stream, uni);
 		stream.close();
 	}
 }

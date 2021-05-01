@@ -15,9 +15,8 @@ public:
 	~Parser() = default;
 
 	void Parse(const std::wstring path);
-	void Print(const std::wstring path, const Analysis::University uni = {});
 
 private:
-	std::wfstream stream{};
+	std::wifstream stream{};
 	std::wstring buffer{};
 };
