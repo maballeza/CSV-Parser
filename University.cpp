@@ -19,13 +19,6 @@ namespace Analysis
 		uni.wsmembers.clear();
 	}
 
-	University& University::operator=(const University& rUni)
-	{
-		fmembers = rUni.fmembers;
-		wsmembers = rUni.wsmembers;
-		return *this;
-	}
-
 	University& University::operator=(University&& rUni) noexcept
 	{
 		fmembers = rUni.fmembers;
@@ -59,6 +52,19 @@ namespace Analysis
 		return *this;
 	}
 
+	std::wostream& operator<<(std::wostream& stream, const University uni)
+	{
+		for (auto& [name, val] : uni.wsmembers)
+		{
+			stream << name << L'\t' << val << L'\n';
+		}
+		for (auto& [name, val] : uni.fmembers)
+		{
+			stream << name << L'\t' << val << L'\n';
+		}
+		return stream;
+	}
+
 	void University::BuildMembers(int index, std::wstring name, std::wstring data)
 	{
 		if (data.empty()) data = L"-1";
@@ -78,16 +84,4 @@ namespace Analysis
 		return fmembers.empty() && wsmembers.empty();
 	}
 
-	std::wostream& operator<<(std::wostream& stream, const University uni)
-	{
-		for (auto& [name, val] : uni.wsmembers)
-		{
-			stream << name << L'\t' << val << L'\n';
-		}
-		for (auto& [name, val] : uni.fmembers)
-		{
-			stream << name << L'\t' << val << L'\n';
-		}
-		return stream;
-	}
 } // namespace Analysis

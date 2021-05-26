@@ -13,7 +13,6 @@ namespace Analysis
 		{ 
 			ret.BuildMembers(0, names, L"0");
 		}
-
 		int total = end - start + 1;
 		if (0 <= start && end < table.List().size())
 		{
@@ -22,7 +21,7 @@ namespace Analysis
 				ret += table.List().at(start++);
 			}
 			ret /= total;
-		}
 		return ret;
+		}
 	}
 }

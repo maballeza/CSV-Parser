@@ -1,22 +1,27 @@
 #pragma once
-#include "Table.h"
+
 #include <algorithm>
 #include <string>
 #include <fstream>
+#include "Table.h"
 
-// Assumptions:
-// 1.	The header row includes at least one entry using
-//		"_" characters to separate multiple-word titles.
-// 2.	The first column contains index values.
+
 class Parser
 {
 public:
-	Parser() = default;
-	~Parser() = default;
+	/**
+	* Expects  
+	* 1. Headers to include at least one entry using an underscore to separate multi-word titles
+	* 2. Indexes to be located in the first column--the exception being the header.
+	*/
+	void ParseData(const std::wstring path);
 
-	void Parse(const std::wstring path);
+	/**
+	* Removes "_" characters and capitalizes initial letters, "of" being an exception.
+	*/
+	void ParseHeader(std::wstring);
+	void ParseEntry(std::wstring);
 
 private:
-	std::wifstream stream{};
-	std::wstring buffer{};
+	std::wfstream stream{};
 };

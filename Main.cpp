@@ -1,7 +1,6 @@
-#include "Parser.h"
-#include "Table.h"
-#include "Analysis.h"
 #include "Manager.h"
+#include "Analysis.h"
+#include "Parser.h"
 
 static std::wstring dataPath{ L"..\\Data\\cwurData.csv" };
 
@@ -15,7 +14,7 @@ static std::wstring dataPath{ L"..\\Data\\cwurData.csv" };
 int main(int argc, char* argv[])
 {
 	Parser par;
-	par.Parse(dataPath);
+	par.ParseData(dataPath);
 	
 	Manager::Print(Routine::Intro);
 
@@ -35,7 +34,7 @@ int main(int argc, char* argv[])
 		else { // Prints the entire list by default.
 			input = 1;
 		}
-		Manager::Print(Routine::Table, results);
+		Manager::Print(Routine::Table, std::move(results));
 	}
 	
 	return 0;

@@ -12,17 +12,16 @@ namespace Analysis
 		University();
 		University(const University&);
 		University(University&&) noexcept;
-		~University() {};
-		University& operator=(const University&);
+		~University() {}
 		University& operator=(University&&) noexcept;
 
 		University& operator+=(const University& rUni);
 		University& operator/=(int val);
 
+		friend std::wostream& operator<<(std::wostream& stream, const University uni);
+
 		void BuildMembers(int, std::wstring, std::wstring);
 		bool Empty() const;
-
-		friend std::wostream& operator<<(std::wostream& stream, const University uni);
 
 	private:
 		std::vector<std::pair<std::wstring, std::wstring>> wsmembers;  // String members.

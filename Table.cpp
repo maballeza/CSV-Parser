@@ -2,16 +2,7 @@
 
 std::vector<Analysis::University> Table::list{};
 std::vector<std::wstring> Table::cols{};
-
-std::vector<Analysis::University>& Table::List()
-{
-	return list;
-}
-
-std::vector<std::wstring>& Table::Columns()
-{
-	return cols;
-}
+Analysis::University Table::item{};
 
 void Table::BuildTable(std::wstring entry)
 {
@@ -26,6 +17,7 @@ void Table::BuildItem(int index, std::wstring value)
 void Table::UpdateList()
 {
 	list.emplace_back(std::move(item));
+	item = std::move(Analysis::University{});
 }
 
 void Table::Print(std::wostream& stream, const Analysis::University uni)
@@ -39,4 +31,14 @@ void Table::Print(std::wostream& stream, const Analysis::University uni)
 			stream << item << L'\n';
 		}
 	}
+}
+
+std::vector<Analysis::University>& Table::List()
+{
+	return list;
+}
+
+std::vector<std::wstring>& Table::Columns()
+{
+	return cols;
 }

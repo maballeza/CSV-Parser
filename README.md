@@ -1,8 +1,8 @@
-## Universities
-Soon to be a generalized CSV reader capable of producing objects on which statistical analysis can be performed.
-  > Currently my project *Universities* parses data ranking top universities worldwide.
+## Overview
+### Universities
+Soon to be a generalized CSV parser capable of producing objects on which statistical analysis can be performed.
+  > *Universities* currently parses data ranking top universities worldwide and optionally performs one form of analysis, printing either the results of the analysis or the parsed list of data.
 
 #### To be continued...
-- A revision of the current method is needed.
-- Additional statistical analysis will soon be added.
+- Additional analytical methods soon to be added.
 - Implemention of template methods are in the works to remove dependence on class *University*
