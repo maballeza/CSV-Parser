@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8049b37b-fb86-4dfe-8cfa-fde0dfd59841}</ProjectGuid>
-    <RootNamespace>Universities</RootNamespace>
+    <ProjectGuid>{24031a83-d9ec-4d24-8020-c1bb531a1b36}</ProjectGuid>
+    <RootNamespace>CSVParser</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -88,6 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,6 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,7 +118,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,7 +132,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,11 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Analysis.h" />
-    <ClInclude Include="Manager.h" />
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="Table.h" />
-    <ClInclude Include="University.h" />
+    <None Include="ReadMe.md" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Analysis.cpp" />
@@ -156,8 +152,11 @@
     <ClCompile Include="University.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\cwurData.csv" />
-    <None Include="README.md" />
+    <ClInclude Include="Analysis.hpp" />
+    <ClInclude Include="Manager.hpp" />
+    <ClInclude Include="Parser.hpp" />
+    <ClInclude Include="Table.hpp" />
+    <ClInclude Include="University.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

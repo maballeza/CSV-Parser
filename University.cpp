@@ -1,8 +1,9 @@
-#include "University.h"
+#include "University.hpp"
+#include <algorithm>
 
 namespace Analysis
 {
-	University::University() : 
+	University::University() :
 		fmembers{}, wsmembers{}
 	{
 	}
@@ -21,66 +22,60 @@ namespace Analysis
 
 	University& University::operator=(University&& rUni) noexcept
 	{
-		fmembers = rUni.fmembers;
-		wsmembers = rUni.wsmembers;
+		fmembers = std::move(rUni.fmembers);
+		wsmembers = std::move(rUni.wsmembers);
 		return *this;
 	}
 
 	University& University::operator+=(const University& rUni)
 	{
 		auto it = rUni.fmembers.begin();
-		for (auto& [name, val] : fmembers)
-		{
-			if (name == (*it).first)
-			{
-				val += (*it).second;
+		for (auto& [name, val] : fmembers) {
+			if (name == it->first) {
+				val += it->second;
 				it++;
 			}
 		}
 		return *this;
 	}
 
-	University& University::operator/=(int val)
+	University& University::operator/=(int value)
 	{
-		for (auto& entry : fmembers)
-		{
-			if (val > 0)
-			{
-				entry.second /= val;
+		for (auto& [ __ , val] : fmembers) {
+			if (value > 0) {
+				val /= value;
 			}
 		}
 		return *this;
 	}
 
-	std::wostream& operator<<(std::wostream& stream, const University uni)
+	std::wostream& operator<<(std::wostream& stream, const University& uni)
 	{
-		for (auto& [name, val] : uni.wsmembers)
-		{
+		for (auto& [name, val] : uni.wsmembers) {
 			stream << name << L'\t' << val << L'\n';
 		}
-		for (auto& [name, val] : uni.fmembers)
-		{
+		for (auto& [name, val] : uni.fmembers) {
 			stream << name << L'\t' << val << L'\n';
 		}
 		return stream;
 	}
 
-	void University::BuildMembers(int index, std::wstring name, std::wstring data)
+	void University::BuildMembers(int index, const std::wstring& name, std::wstring data)
 	{
-		if (data.empty()) data = L"-1";
-		if (std::none_of(data.begin(), data.end(), [](wchar_t x) { return isalpha(x); }))
-		{
+		if (data.empty()) {
+			data = L"-1";
+		}
+
+		if (std::none_of(data.begin(), data.end(), [] (wchar_t x) { return isalpha(x); })) {
 			float f = stof(data);
 			fmembers.emplace_back(std::make_pair(name, f));
 		}
-		else if (index == 1 || index == 2)
-		{
+		else if (index == 1 || index == 2) {
 			wsmembers.emplace_back(std::make_pair(name, data));
 		}
 	}
 
-	bool University::Empty() const
-	{
+	bool University::Empty() const {
 		return fmembers.empty() && wsmembers.empty();
 	}
 

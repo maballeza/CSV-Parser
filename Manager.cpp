@@ -1,35 +1,41 @@
-#include "Manager.h"
+#include "Manager.hpp"
+#include "Table.hpp"
+#include <iostream>
 
 int Manager::Determine(Routine r, std::pair<int, int>* interval) {
     int choice = 1;
-    if (r == Routine::Choice) {
-        std::wcout << L"Print options are (1) Complete List (2) Average"
-            << std::endl << L"\tChoice: ";
+    switch (r) {
+    case Routine::Choice: {
+        std::wcout << L"Print options are (1) Complete List (2) Average\n"
+                   << L"\tChoice: ";
         std::wcin >> choice;
+        std::wcout << '\n';
         return choice;
     }
-    else if (r == Routine::Interval) {
-        std::wcout << std::endl << L"\tStarting index:\t";
+    case Routine::Interval: {
+        std::wcout << L"\tStarting index:\t";
         std::wcin >> interval->first;
         std::wcout << L"\tEnding index:\t";
         std::wcin >> interval->second;
-        std::wcout << std::endl << std::endl;
+        std::wcout << "\n\n";
         return choice;
+    }
+    default:
+        return 0;
     }
 }
 
 void Manager::Print(Routine r, Analysis::University&& uni) {
-    if (r == Routine::Intro) {
-        std::wcout << L"Project: Algorithms - Universities" 
-                    << std::endl << std::endl;
+    switch (r) {
+    case Routine::Intro: {
+        std::wcout << L"Project: Algorithms - Universities\n\n";
+        break;
     }
-    else if (r == Routine::Table) {
-        std::wofstream stream{ path };
+    case Routine::Table: {
         Table table;
-        if (stream.is_open())
-        {
+        if (std::wofstream stream { path }) {
             table.Print(stream, uni);
-            stream.close();
         }
-    }
+        break;
+    }}
 }

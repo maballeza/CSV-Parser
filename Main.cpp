@@ -1,17 +1,19 @@
-#include "Manager.h"
-#include "Analysis.h"
-#include "Parser.h"
+#include "Manager.hpp"
+#include "Analysis.hpp"
+#include "Parser.hpp"
+#include <string>
+#include <utility>
 
-static std::wstring dataPath{ L"..\\Data\\cwurData.csv" };
+std::wstring dataPath { L"In\\cwurData.csv" };
+
+enum Status { Exit, Proceed, Calculate };
 
 /**
-* This simple loop parses through the list of top universities
-* and cycles through the main loop providing options for printing summaries
-* to the external file "Res.txt" in the "Data" directory.
-* 
-* Please build in Release mode using C++17.
+* This simple loop provides the ability to choose which type 
+* of calculation to perform, the results of which are printed
+* to file "Res.txt" in the "Out" directory.
 */
-int main(int argc, char* argv[])
+int main()
 {
 	Parser par;
 	par.ParseData(dataPath);
@@ -20,20 +22,22 @@ int main(int argc, char* argv[])
 
 	int input = 1;
 	while (input) {
-		std::pair<int, int> interval{ 0, 9 };
+		std::pair<int, int> interval { 0, 9 };
 		input = Manager::Determine(Routine::Choice);
 		
 		Analysis::University results;
-		if (input == 0) { // Exits.
+		switch (input) {
+		case Status::Exit: {
 			break;
 		}
-		else if (input == 2) { // Evaluates an average at the user's discretion.
+		case Status::Calculate: { // Evaluates an average at the user's discretion.
 			input = Manager::Determine(Routine::Interval, &interval);
 			results = Analysis::Average(interval);
+			break;
 		}
-		else { // Prints the entire list by default.
+		default: { // Prints the entire list.
 			input = 1;
-		}
+		}}
 		Manager::Print(Routine::Table, std::move(results));
 	}
 	

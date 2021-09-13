@@ -1,27 +1,21 @@
-#include "Analysis.h"
+#include "Analysis.hpp"
+#include "Table.hpp"
 
-namespace Analysis
+Analysis::University Analysis::Average(std::pair<int, int>& range)
 {
-	University Average(std::pair<int, int> range)
-	{
-		Table table;
-		University ret;
-		int start = range.first;
-		int end = range.second;
+	Table table;
+	Analysis::University ret;
+	for (auto& names : table.Columns()) { 
+		ret.BuildMembers(0, names, L"0");
+	}
 
-		for (auto& names : table.Columns())
-		{ 
-			ret.BuildMembers(0, names, L"0");
+	auto [start, end] = range;
+	int total = end - start + 1;
+	if (0 <= start && end <= table.List().size() - 1) {
+		while (start <= end) {
+			ret += table.List().at(start++);
 		}
-		int total = end - start + 1;
-		if (0 <= start && end < table.List().size())
-		{
-			while (start <= end)
-			{
-				ret += table.List().at(start++);
-			}
-			ret /= total;
+		ret /= total;
 		return ret;
-		}
 	}
 }
